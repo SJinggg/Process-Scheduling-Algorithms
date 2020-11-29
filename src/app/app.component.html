@@ -6,48 +6,7 @@
   <div class="card">
     <div class="card-body">
       <form>
-        <div>
-          <button type="button" class="btn btn-outline-warning">+ Add New Process</button>
-          <button type="button" class="btn btn-outline-success ml-2">Run</button>
-        </div>
-        <table class="table mt-2">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Process Name</th>
-              <th scope="col">Arrival Time</th>
-              <th scope="col">Burst Time</th>
-              <th scope="col">Priority</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let process of processes">
-              <td>
-                <button type='button' class="btn btn-danger">
-                  <i class="fa fa-trash"></i>
-                </button>
-              </td>
-              <td>
-                {{process.name}}
-              </td>
-              <td>
-                <div class="form-group">
-                  <input type="text" class="form-control" id="start" [(ngModel)]="process.start">
-                </div>
-              </td>
-              <td>
-                <div class="form-group">
-                  <input type="text" class="form-control" id="burst" [(ngModel)]="process.burst">
-                </div>
-              </td>
-              <td>
-                <div class="form-group">
-                  <input type="text" class="form-control" id="prior" [(ngModel)]="process.prior">
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <app-table></app-table>
         <div class="mt-2">
           <div class="form-check form-check-inline">
             <input class="form-check-input" type="checkbox" id="fcfs" value="fcfs" checked>
@@ -78,24 +37,3 @@
     </div>
   </div>
 </div>
-
-<script>
-export default {
-  data () {
-    return {
-      processes = [
-        {
-          name: 'P0',
-          start: 0,
-          burst: 7
-        },
-        {
-          name: 'P1',
-          start: 3,
-          burst: 2
-        }
-      ]
-    };
-  }
-}
-</script>
