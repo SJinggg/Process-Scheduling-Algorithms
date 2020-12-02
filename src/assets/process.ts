@@ -2,10 +2,10 @@ export default class Process{
   #processName: string;
   static processNum: number = 0;
   #processDtl: { arrivalTime: any, burstTime: any, priority: any, startTime: any, leftTime: any, endTime: any, turnAround: any, waitTime: any};
-  
+  #color: string;
 
-  constructor (arrivalTime: any, priority: any, burstTime: any) {
-    this.#processName = "P" + (Process.processNum++).toString();
+  constructor (processName: string, arrivalTime: any, priority: any, burstTime: any, color: any) {
+    this.#processName = processName;
     this.#processDtl = {
       arrivalTime: arrivalTime,
       burstTime: burstTime,
@@ -15,10 +15,13 @@ export default class Process{
       endTime: undefined,
       turnAround: undefined,
       waitTime: undefined
-    }
+    };
+    this.#color= color;
   };
 
   /** Getters or Accessors */
+  public getProcessName () { return this.#processName; };
+
   public getArrivalTime () { return this.#processDtl.arrivalTime; };
 
   public getBurstTime () { return this.#processDtl.burstTime; };
@@ -34,6 +37,8 @@ export default class Process{
   public getTurnAround () { return this.#processDtl.turnAround; };
 
   public getWaitTime () { return this.#processDtl.waitTime; };
+
+  public getColor () { return this.#color; };
 
   /** Setters or Mutators */
   public setStartTime (time: any) { this.#processDtl.startTime = time; };

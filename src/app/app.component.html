@@ -5,35 +5,33 @@
   </div>
   <div class="card">
     <div class="card-body">
-      <form>
-        <app-table></app-table>
-        <div class="mt-2">
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="fcfs" value="fcfs" checked>
-            <label class="form-check-label" for="fcfs">First Come First Serve (FCFS)</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="sjf" value="sjf" checked>
-            <label class="form-check-label" for="sjf">Non-Preemptive SJF</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="psjf" value="psjf" checked>
-            <label class="form-check-label" for="psjf">Preemptive SJF</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="priority" value="priority" checked>
-            <label class="form-check-label" for="priority">Non-Preemptive Priority</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="np" value="np" checked>
-            <label class="form-check-label" for="np">Preemptive Priority</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="rr" value="rr" checked>
-            <label class="form-check-label" for="rr">Round Robbin</label>
-          </div>
+      <app-table (submitEvent)="receiveMessage($event)"></app-table>
+      <div class="mt-2">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+          <label class="btn btn-outline-primary">
+            <input type="checkbox" name="fcfs" id="fcfs" value="fcfs" checked (click)="changeState($event)"> FCFS
+          </label>
+          <label class="btn btn-outline-secondary">
+            <input type="checkbox" name="npsjf" id="npsjf" value="npsjf" checked (click)="changeState($event)"> Non-Preemptive SJF
+          </label>
+          <label class="btn btn-outline-danger">
+            <input type="checkbox" name="npp" id="npp" value="fcfs" checked (click)="changeState($event)"> Non-Preemptive Priority
+          </label>
+          <label class="btn btn-outline-warning">
+            <input type="checkbox" name="psjf" id="psjf" value="psjf" checked (click)="changeState($event)"> Preemptive SJF
+          </label>
+          <label class="btn btn-outline-info">
+            <input type="checkbox" name="pp" id="pp" value="pp" checked (click)="changeState($event)"> Preemptive Priority
+          </label>
+          <label class="btn btn-outline-dark">
+            <input type="checkbox" name="rr" id="rr" value="rr" checked (click)="changeState($event)"> Round Robin
+          </label>
         </div>
-      </form>
+      </div>
     </div>
+  </div>
+  <div *ngIf="submitted" class="mt-4 mb-4">
+    <h2>Result</h2>
+    <app-fcfs *ngIf="fcfs" [myProcess]="process"></app-fcfs>
   </div>
 </div>
