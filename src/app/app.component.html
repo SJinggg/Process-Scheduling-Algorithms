@@ -3,10 +3,10 @@
     <h1>Process Scheduling Algorithms</h1>
     <small class="text-muted">Presented by Koh Shi Jing</small>
   </div>
-  <div class="card">
+  <div class="card" style="overflow-x: auto;">
     <div class="card-body">
       <app-table (submitEvent)="receiveMessage($event)"></app-table>
-      <div class="mt-2">
+      <div class="mt-2 d-none d-md-block">
         <div class="btn-group btn-group-toggle" data-toggle="buttons">
           <label class="btn btn-outline-primary">
             <input type="checkbox" name="fcfs" id="fcfs" value="fcfs" checked (click)="changeState($event)"> FCFS
@@ -28,10 +28,40 @@
           </label>
         </div>
       </div>
+      <div class="mt-2 d-md-none">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+          <label class="btn btn-outline-primary btn-sm">
+            <input type="checkbox" name="fcfs" id="fcfs" value="fcfs" checked (click)="changeState($event)"> FCFS
+          </label>
+          <label class="btn btn-outline-secondary btn-sm">
+            <input type="checkbox" name="npsjf" id="npsjf" value="npsjf" checked (click)="changeState($event)"> Non-Preemptive SJF
+          </label>
+          <label class="btn btn-outline-danger btn-sm">
+            <input type="checkbox" name="npp" id="npp" value="fcfs" checked (click)="changeState($event)"> Non-Preemptive Priority
+          </label>
+          <label class="btn btn-outline-warning btn-sm">
+            <input type="checkbox" name="psjf" id="psjf" value="psjf" checked (click)="changeState($event)"> Preemptive SJF
+          </label>
+          <label class="btn btn-outline-info btn-sm">
+            <input type="checkbox" name="pp" id="pp" value="pp" checked (click)="changeState($event)"> Preemptive Priority
+          </label>
+          <label class="btn btn-outline-dark btn-sm">
+            <input type="checkbox" name="rr" id="rr" value="rr" checked (click)="changeState($event)"> Round Robin
+          </label>
+        </div>
+      </div>
     </div>
   </div>
   <div *ngIf="submitted" class="mt-4 mb-4">
     <h2>Result</h2>
-    <app-fcfs *ngIf="fcfs" [myProcess]="process"></app-fcfs>
+    <div class="mb-5">
+      <app-fcfs *ngIf="fcfs" [myProcess]="process"></app-fcfs>
+    </div>
+    <div class="mb-5">
+      <app-npsjf *ngIf="npsjf" [myProcess]="process"></app-npsjf>
+    </div>
+    <div class="mb-5">
+      <app-npp *ngIf="npp" [myProcess]="process"></app-npp>
+    </div>
   </div>
 </div>

@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { count } from 'console';
 import process from '../../assets/process';
 
 @Component({
@@ -26,7 +25,9 @@ export class GanttChartCellComponent implements OnInit {
 
   static count = 0;
 
-  constructor() { }
+  constructor() {
+    GanttChartCellComponent.count = 0;
+  }
 
   ngOnInit(): void {
     GanttChartCellComponent.count += 1;

@@ -10,13 +10,17 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FCFSComponent } from './fcfs/fcfs.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GanttChartCellComponent } from './gantt-chart-cell/gantt-chart-cell.component';
+import { NpsjfComponent } from './npsjf/npsjf.component';
+import { NppComponent } from './npp/npp.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TableComponent,
     FCFSComponent,
-    GanttChartCellComponent
+    GanttChartCellComponent,
+    NpsjfComponent,
+    NppComponent
   ],
   imports: [
     BrowserModule,

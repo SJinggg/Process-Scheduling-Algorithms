@@ -5,9 +5,9 @@ export function compareArrival (p1: process, p2: process) {
 }
 
 export function compareBurstTime (p1: process, p2: process) {
-  return p1.getBurstTime() - p2.getBurstTime();
+  return (compareArrival(p1, p2) === 0 ? p1.getBurstTime() - p2.getBurstTime() : compareArrival(p1, p2));
 }
 
 export function comparePriority (p1: process, p2: process) {
-  return p1.getPriority() - p2.getPriority();
+  return (compareArrival(p1, p2) === 0 ? p1.getPriority() - p2.getPriority() : compareArrival(p1, p2));
 }

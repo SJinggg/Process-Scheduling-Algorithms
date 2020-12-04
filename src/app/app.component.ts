@@ -1,5 +1,5 @@
-import { ViewChild } from '@angular/core';
-import { Component } from '@angular/core';
+import { ViewChild, Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { TableComponent } from './table/table.component'
 
 @Component({
@@ -15,12 +15,13 @@ export class AppComponent {
   npp = true;
   psjf = true;
   pp = true;
-  rr = true
+  rr = true;
 
   @ViewChild(TableComponent) process: any;
 
   receiveMessage($event: any) {
     this.submitted = $event;
+    console.log(this.process);
   }
 
   changeState($event: any) {

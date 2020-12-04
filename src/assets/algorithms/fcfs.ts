@@ -5,9 +5,6 @@ export default function fcfs(process: process[]) {
   /** Variable initialization */
   let fcfsPro: process[] = [...process].sort(compareArrival);
   let minArr = findMinArrival(process);
-  let totalBurstTime = process.reduce((total, item) => {
-    return total + item.getBurstTime();
-  }, 0) + minArr;
 
   let time = minArr;
   for(let i = 0; i < fcfsPro.length; i++) {

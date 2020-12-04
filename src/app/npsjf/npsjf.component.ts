@@ -1,21 +1,19 @@
 import { Component, Input, OnInit } from '@angular/core';
-import fcfs from '../../assets/algorithms/fcfs';
+import npsjf from '../../assets/algorithms/npsjf';
 import process from '../../assets/process';
 import { avgTurnAround, avgWaitingTime } from '../../assets/calculations/calculateAvg';
 import { totalTurnAround, totalWaitingTime } from '../../assets/calculations/calculateTotal';
 
 @Component({
-  selector: 'app-fcfs',
-  template: `
-  <h3>First Come First Serve (FCFS)</h3>
-  <app-cell *ngFor="let process of fcfsprocess;" [myProcess]="process" [width]=getWidth(process.getBurstTime()) [last]="fcfsprocess.length"></app-cell>`
+  selector: 'app-npsjf',
+  template: `<h3>Non-Preemptive Shortest Job First (NPSJF)</h3>
+  <app-cell *ngFor="let process of npsjfprocess;" [myProcess]="process" [width]=getWidth(process.getBurstTime()) [last]="npsjfprocess.length"></app-cell>`
 })
-
-export class FCFSComponent implements OnInit {
-
+export class NpsjfComponent implements OnInit {
+  
   totalBurstTime = 0;
   process: process[] = [];
-  fcfsprocess: process[] = [];
+  npsjfprocess: process[] = [];
 
   @Input() myProcess: any;
 
@@ -23,7 +21,7 @@ export class FCFSComponent implements OnInit {
 
   ngOnInit(): void {
     this.generateProcess();
-    this.calculateFCFS();
+    this.calculateNPSJF();
   }
 
   generateProcess() {
@@ -32,9 +30,9 @@ export class FCFSComponent implements OnInit {
     })
   }
 
-  calculateFCFS() {
-    this.fcfsprocess = fcfs(this.process);
-    this.totalBurstTime = this.fcfsprocess.reduce((sum, p) => {
+  calculateNPSJF() {
+    this.npsjfprocess = npsjf(this.process);
+    this.totalBurstTime = this.npsjfprocess.reduce((sum, p) => {
       return sum + p.getBurstTime();
     }, 0);
   }

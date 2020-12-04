@@ -6,7 +6,8 @@ import { faTrash} from '@fortawesome/free-solid-svg-icons';
   template: `
   <div>
     <button type="button" class="btn btn-light" (click)="addProcess()">+ Add New Process</button>
-    <button *ngIf="processes.length > 0" type="button" class="btn btn-outline-success ml-2" (click)=runProcess()>Run</button>
+    <button *ngIf="processes.length > 0 && !submitted" type="button" class="btn btn-outline-success ml-2" (click)=runProcess()>Run</button>
+    <button *ngIf="submitted" type="button" class="btn btn-outline-danger ml-2" (click)=cancelProcess()>Stop</button>
   </div>
   <div *ngIf="getAlert" class="alert alert-danger alert-dismissible mt-2" role="alert">
     Make sure only numeric inputs.
@@ -117,6 +118,11 @@ export class TableComponent implements OnInit {
       }
       
     })
+  }
+
+  cancelProcess () {
+    this.submitted = false;
+    this.submitEvent.emit(this.submitted);
   }
 
 }
