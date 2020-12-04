@@ -1,0 +1,21 @@
+.cell {	color : white;	
+	padding: 10px;
+	position: relative;
+  text-align: center;
+  border-radius: 5px; 
+  display:inline-block;
+}
+
+.last {
+  position : absolute;
+	bottom: -25px;
+	right : 0;
+	color: black;
+}
+
+.start {
+  position: absolute;
+  left: 0px;
+  bottom: -25px;
+  color: black;
+}

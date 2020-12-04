@@ -9,12 +9,14 @@ import { TableComponent } from './table/table.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FCFSComponent } from './fcfs/fcfs.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { GanttChartCellComponent } from './gantt-chart-cell/gantt-chart-cell.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TableComponent,
-    FCFSComponent
+    FCFSComponent,
+    GanttChartCellComponent
   ],
   imports: [
     BrowserModule,

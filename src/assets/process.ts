@@ -1,20 +1,20 @@
 export default class Process{
   #processName: string;
   static processNum: number = 0;
-  #processDtl: { arrivalTime: any, burstTime: any, priority: any, startTime: any, leftTime: any, endTime: any, turnAround: any, waitTime: any};
+  #processDtl: { arrivalTime: number, burstTime: number, priority: number, startTime: number, leftTime: number, endTime: number, turnAround: number, waitTime: number};
   #color: string;
 
-  constructor (processName: string, arrivalTime: any, priority: any, burstTime: any, color: any) {
+  constructor (processName: string, arrivalTime: number, priority: number, burstTime: number, color: any) {
     this.#processName = processName;
     this.#processDtl = {
-      arrivalTime: arrivalTime,
-      burstTime: burstTime,
-      priority: priority,
-      startTime: undefined,
-      leftTime: undefined,
-      endTime: undefined,
-      turnAround: undefined,
-      waitTime: undefined
+      arrivalTime: Number(arrivalTime),
+      burstTime: Number(burstTime),
+      priority: Number(priority),
+      startTime: -1,
+      leftTime: -1,
+      endTime: -1,
+      turnAround: -1,
+      waitTime: -1
     };
     this.#color= color;
   };
@@ -22,21 +22,21 @@ export default class Process{
   /** Getters or Accessors */
   public getProcessName () { return this.#processName; };
 
-  public getArrivalTime () { return this.#processDtl.arrivalTime; };
+  public getArrivalTime (): number { return this.#processDtl.arrivalTime; };
 
-  public getBurstTime () { return this.#processDtl.burstTime; };
+  public getBurstTime (): number { return this.#processDtl.burstTime; };
 
-  public getPriority () { return this.#processDtl.priority; };
+  public getPriority (): number { return this.#processDtl.priority; };
 
-  public getStartTime () { return this.#processDtl.startTime; };
+  public getStartTime (): number { return this.#processDtl.startTime; };
 
-  public getLeftTime () { return this.#processDtl.leftTime; };
+  public getLeftTime (): number { return this.#processDtl.leftTime; };
 
-  public getEndTime () { return this.#processDtl.endTime; };
+  public getEndTime (): number { return this.#processDtl.endTime; };
 
-  public getTurnAround () { return this.#processDtl.turnAround; };
+  public getTurnAround (): number { return this.#processDtl.turnAround; };
 
-  public getWaitTime () { return this.#processDtl.waitTime; };
+  public getWaitTime (): number { return this.#processDtl.waitTime; };
 
   public getColor () { return this.#color; };
 

@@ -24,7 +24,6 @@ export class AppComponent {
   }
 
   changeState($event: any) {
-    console.log($event.target.id);
     let id:string = $event.target.id;
     
     if (id === "fcfs" || id === "npsjf" || id === "npp" || id === "psjf" || id === "pp" || id === "rr")
