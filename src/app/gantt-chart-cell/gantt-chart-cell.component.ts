@@ -4,7 +4,7 @@ import process from '../../assets/process';
 @Component({
   selector: 'app-cell',
   template: `
-  <span class="cell" style="background-color:{{myProcess.getColor()}}; width: {{width}}%;">
+  <span *ngIf="myProcess" class="cell" style="background-color:{{myProcess.getColor()}}; width: {{width}}%;">
   <div class="start">
     <span>{{ myProcess.getStartTime() }}</span>
   </div>
@@ -31,8 +31,6 @@ export class GanttChartCellComponent implements OnInit {
 
   ngOnInit(): void {
     GanttChartCellComponent.count += 1;
-    console.log(GanttChartCellComponent.count);
-    console.log(this.last);
   }
 
   checklast() : boolean{

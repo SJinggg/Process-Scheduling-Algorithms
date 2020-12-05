@@ -9,8 +9,8 @@ export default function npp(process: process[]) {
   for(let i = 0; i < nppPro.length; i++) {
     nppPro[i].setStartTime(time);
     nppPro[i].setEndTime(time + nppPro[i].getBurstTime());
-    nppPro[i].setWaitTime(nppPro[i].getEndTime() - nppPro[i].getArrivalTime());
     nppPro[i].setTurnAround(nppPro[i].getEndTime() - nppPro[i].getArrivalTime());
+    nppPro[i].setWaitTime(nppPro[i].getTurnAround() - nppPro[i].getArrivalTime());
     time += nppPro[i].getBurstTime();
   }
   return nppPro;

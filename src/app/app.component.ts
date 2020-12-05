@@ -21,7 +21,6 @@ export class AppComponent {
 
   receiveMessage($event: any) {
     this.submitted = $event;
-    console.log(this.process);
   }
 
   changeState($event: any) {

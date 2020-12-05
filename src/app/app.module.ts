@@ -12,6 +12,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GanttChartCellComponent } from './gantt-chart-cell/gantt-chart-cell.component';
 import { NpsjfComponent } from './npsjf/npsjf.component';
 import { NppComponent } from './npp/npp.component';
+import { PsjfComponent } from './psjf/psjf.component';
+import { PpComponent } from './pp/pp.component';
+import { RrComponent } from './rr/rr.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,10 @@ import { NppComponent } from './npp/npp.component';
     FCFSComponent,
     GanttChartCellComponent,
     NpsjfComponent,
-    NppComponent
+    NppComponent,
+    PsjfComponent,
+    PpComponent,
+    RrComponent
   ],
   imports: [
     BrowserModule,

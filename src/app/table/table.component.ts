@@ -8,6 +8,19 @@ import { faTrash} from '@fortawesome/free-solid-svg-icons';
     <button type="button" class="btn btn-light" (click)="addProcess()">+ Add New Process</button>
     <button *ngIf="processes.length > 0 && !submitted" type="button" class="btn btn-outline-success ml-2" (click)=runProcess()>Run</button>
     <button *ngIf="submitted" type="button" class="btn btn-outline-danger ml-2" (click)=cancelProcess()>Stop</button>
+    <label class="d-none d-md-block col-3" style="float: right; white-space: nowrap;">
+      <span>Round Robbin Interval:</span>
+      <input type="text" class="form-control" id="rr" [(ngModel)]="rr" value={{rr}}>
+    </label>
+    <div *ngIf="rrWarning" class="alert alert-danger alert-dismissible mt-2" role="alert">
+    Round Robbin Interval value should be more than 0
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)='getAlert=false'>
+        <span aria-hidden="true">&times;</span>
+      </button> 
+    </div>
+    <div class="d-md-none col-12 mt-2 p-0">
+      <input type="text" placeholder="Round Robbin Interval" class="form-control" id="rr" [(ngModel)]="rr" value={{rr}}>
+    </div>
   </div>
   <div *ngIf="getAlert" class="alert alert-danger alert-dismissible mt-2" role="alert">
     Make sure only numeric inputs.
@@ -72,6 +85,8 @@ export class TableComponent implements OnInit {
   getAlert = false;
   getWarning = false;
   submitted = false;
+  rr: number = 3;
+  rrWarning = false;
 
   @Output() submitEvent = new EventEmitter<boolean>();
 
@@ -104,20 +119,25 @@ export class TableComponent implements OnInit {
   }
 
   runProcess () {
-    this.processes.forEach((item) => {
-      if((item.start) === null || item.burst === null || item.priority === null)
-        this.getWarning = true;
-      else if (/[a-z]/i.test(item.start) || /[a-z]/i.test(item.burst) || /[a-z]/i.test(item.priority)) {
-        this.getAlert = true;
-      }
-      else{
-        this.getWarning = false;
-        this.getAlert = false;
-        this.submitted = true;
-        this.submitEvent.emit(this.submitted);
-      }
-      
-    })
+    if(this.rr < 1) {
+      this.rrWarning = true;
+    }
+    else{
+      this.rrWarning = false;
+      this.processes.forEach((item) => {
+        if((item.start) === null || item.burst === null || item.priority === null)
+          this.getWarning = true;
+        else if (/[a-z]/i.test(item.start) || /[a-z]/i.test(item.burst) || /[a-z]/i.test(item.priority)) {
+          this.getAlert = true;
+        }
+        else{
+          this.getWarning = false;
+          this.getAlert = false;
+          this.submitted = true;
+          this.submitEvent.emit(this.submitted);
+        }
+      })
+    }
   }
 
   cancelProcess () {

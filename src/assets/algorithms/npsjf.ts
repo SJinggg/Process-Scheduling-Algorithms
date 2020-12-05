@@ -9,8 +9,8 @@ export default function npsjf(process: process[]) {
   for(let i = 0; i < npsjfPro.length; i++) {
     npsjfPro[i].setStartTime(time);
     npsjfPro[i].setEndTime(time + npsjfPro[i].getBurstTime());
-    npsjfPro[i].setWaitTime(npsjfPro[i].getEndTime() - npsjfPro[i].getArrivalTime());
     npsjfPro[i].setTurnAround(npsjfPro[i].getEndTime() - npsjfPro[i].getArrivalTime());
+    npsjfPro[i].setWaitTime(npsjfPro[i].getTurnAround() - npsjfPro[i].getArrivalTime());
     time += npsjfPro[i].getBurstTime();
   }
   return npsjfPro;
