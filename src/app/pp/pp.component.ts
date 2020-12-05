@@ -1,20 +1,23 @@
 import { Component, Input, OnInit } from '@angular/core';
 import pp from '../../assets/algorithms/pp';
 import process from '../../assets/process';
-import { avgTurnAround, avgWaitingTime } from '../../assets/calculations/calculateAvg';
-import { totalTurnAround, totalWaitingTime } from '../../assets/calculations/calculateTotal';
 
 @Component({
   selector: 'app-pp',
   template: `<h3>Preemptive Priority (PP)</h3>
-  <app-cell *ngFor="let process of ppprocess;" [myProcess]="process" [width]=getWidth(process.getBurstTime()) [last]="ppprocess.length"></app-cell>`
+  <app-cell *ngFor="let process of ppprocess;" [myProcess]="process" [width]=getWidth(process.getBurstTime()) [last]="ppprocess.length"></app-cell>
+  <div class="mt-4 text-info" data-toggle="collapse" href="#summaryTablepp" role="button" aria-expanded="false" aria-controls="summaryTablepp">View Summary Table&#9660;</div>
+  <div class="collapse" id="summaryTablepp">
+    <app-summary-table [myprocess]="calprocess"></app-summary-table>
+  </div>
+  `
 })
 export class PpComponent implements OnInit {
 
   totalBurstTime = 0;
   process: process[] = [];
   ppprocess: process[] = [];
-  result: any;
+  calprocess: process[] = [];
 
   @Input() myProcess: any;
 
@@ -32,8 +35,8 @@ export class PpComponent implements OnInit {
   }
 
   calculatePSJF() {
-    this.result = pp(this.process);
-    this.ppprocess = this.result.pp;
+    this.ppprocess = pp(this.process).pp;
+    this.calprocess = pp(this.process).ppPro;
     console.log(this.ppprocess.length);
     this.totalBurstTime = this.ppprocess.reduce((sum, p) => {
       return sum + p.getBurstTime();

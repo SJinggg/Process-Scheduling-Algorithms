@@ -1,20 +1,23 @@
 import { Component, Input, OnInit } from '@angular/core';
 import psjf from '../../assets/algorithms/psjf';
 import process from '../../assets/process';
-import { avgTurnAround, avgWaitingTime } from '../../assets/calculations/calculateAvg';
-import { totalTurnAround, totalWaitingTime } from '../../assets/calculations/calculateTotal';
 
 @Component({
   selector: 'app-psjf',
   template: `<h3>Preemptive Shortest Job First (PSJF)</h3>
-  <app-cell *ngFor="let process of psjfprocess;" [myProcess]="process" [width]=getWidth(process.getBurstTime()) [last]="psjfprocess.length"></app-cell>`
+  <app-cell *ngFor="let process of psjfprocess;" [myProcess]="process" [width]=getWidth(process.getBurstTime()) [last]="psjfprocess.length"></app-cell>
+  <div class="mt-4 text-info" data-toggle="collapse" href="#summaryTablepsjf" role="button" aria-expanded="false" aria-controls="summaryTablepsjf">View Summary Table&#9660;</div>
+  <div class="collapse" id="summaryTablepsjf">
+    <app-summary-table [myprocess]="calprocess"></app-summary-table>
+  </div>
+  `
 })
 export class PsjfComponent implements OnInit {
 
   totalBurstTime = 0;
   process: process[] = [];
   psjfprocess: process[] = [];
-  result: any;
+  calprocess: process[] = [];
 
   @Input() myProcess: any;
 
@@ -32,9 +35,8 @@ export class PsjfComponent implements OnInit {
   }
 
   calculatePSJF() {
-    this.result = psjf(this.process);
-    this.psjfprocess = this.result.psjf;
-    console.log(this.psjfprocess.length);
+    this.psjfprocess = psjf(this.process).psjf;
+    this.calprocess = psjf(this.process).psjfPro;
     this.totalBurstTime = this.psjfprocess.reduce((sum, p) => {
       return sum + p.getBurstTime();
     }, 0);

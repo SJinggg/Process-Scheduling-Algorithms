@@ -5,15 +5,17 @@ export function compareArrival (p1: process, p2: process) {
 }
 
 export function compareBurstTime (p1: process, p2: process) {
-  return (compareArrival(p1, p2) === 0 ? p1.getBurstTime() - p2.getBurstTime() : compareArrival(p1, p2));
+  return p1.getLeftTime() - p2.getLeftTime();
 }
 
 export function comparePriority (p1: process, p2: process) {
-  return (compareArrival(p1, p2) === 0 ? p1.getPriority() - p2.getPriority() : compareArrival(p1, p2));
+  return p1.getPriority() - p2.getPriority();
 }
 
 export function compareName (p1: process, p2: process) {
-  if (p1.getProcessName() > p2.getProcessName()) return -1;
-  else if(p1.getProcessName() < p2.getProcessName()) return 1;
+  let p1name:any = p1.getProcessName();
+  let p2name:any = p2.getProcessName();
+  if (p1name > p2name) return 1;
+  else if(p1name < p2name) return -1;
   else return 1;
 }

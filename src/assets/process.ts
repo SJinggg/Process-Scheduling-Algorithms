@@ -41,15 +41,17 @@ export default class Process{
   public getColor () { return this.color; };
 
   /** Setters or Mutators */
-  public setStartTime (time: any) { if (this.processDtl) this.processDtl.startTime = time; };
+  public setArrivalTime (time: number) { if (this.processDtl) this.processDtl.arrivalTime = time; };
+
+  public setStartTime (time: number) { if (this.processDtl) this.processDtl.startTime = time; };
 
   public setLeftTime () { if (this.processDtl) this.processDtl.leftTime -= 1; };
 
-  public setEndTime (time: any) { if (this.processDtl) this.processDtl.endTime = time; };
+  public setEndTime (time: number) { if (this.processDtl) this.processDtl.endTime = time; };
 
-  public setTurnAround (time: any) { if (this.processDtl) this.processDtl.turnAround = time; };
+  public setTurnAround (time: number) { if (this.processDtl) this.processDtl.turnAround = time; };
 
-  public setWaitTime (time: any) { if (this.processDtl) this.processDtl.waitTime = time; };
+  public setWaitTime (time: number) { if (this.processDtl) this.processDtl.waitTime = time; };
 
   /** Status update */
   public isCompleted () { 
@@ -57,7 +59,7 @@ export default class Process{
     return (this.processDtl.leftTime === 0);
   };
 
-  public isArrived (time: any) {
+  public isArrived (time: number) {
     if (!this.processDtl) return false;
     return (this.processDtl.arrivalTime >= time);
   };

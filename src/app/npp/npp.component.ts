@@ -1,19 +1,23 @@
 import { Component, Input, OnInit } from '@angular/core';
 import npp from '../../assets/algorithms/npp';
 import process from '../../assets/process';
-import { avgTurnAround, avgWaitingTime } from '../../assets/calculations/calculateAvg';
-import { totalTurnAround, totalWaitingTime } from '../../assets/calculations/calculateTotal';
 
 @Component({
   selector: 'app-npp',
   template: `<h3>Non-Preemptive Priority (NPP)</h3>
-  <app-cell *ngFor="let process of nppprocess;" [myProcess]="process" [width]=getWidth(process.getBurstTime()) [last]="nppprocess.length"></app-cell>`
+  <app-cell *ngFor="let process of nppprocess;" [myProcess]="process" [width]=getWidth(process.getBurstTime()) [last]="nppprocess.length"></app-cell>
+  <div class="mt-4 text-info" data-toggle="collapse" href="#summaryTablenpp" role="button" aria-expanded="false" aria-controls="summaryTablenpp">View Summary Table&#9660;</div>
+  <div class="collapse" id="summaryTablenpp">
+    <app-summary-table [myprocess]="calprocess"></app-summary-table>
+  </div>
+  `
 })
 export class NppComponent implements OnInit {
   
   totalBurstTime = 0;
   process: process[] = [];
   nppprocess: process[] = [];
+  calprocess: process[] = [];
 
   @Input() myProcess: any;
 
@@ -31,7 +35,8 @@ export class NppComponent implements OnInit {
   }
 
   calculateNPP() {
-    this.nppprocess = npp(this.process);
+    this.nppprocess = npp(this.process).nppPro;
+    this.calprocess = npp(this.process).sortednpp;
     this.totalBurstTime = this.nppprocess.reduce((sum, p) => {
       return sum + p.getBurstTime();
     }, 0);

@@ -15,6 +15,7 @@ import { NppComponent } from './npp/npp.component';
 import { PsjfComponent } from './psjf/psjf.component';
 import { PpComponent } from './pp/pp.component';
 import { RrComponent } from './rr/rr.component';
+import { SummaryTableComponent } from './summary-table/summary-table.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { RrComponent } from './rr/rr.component';
     NppComponent,
     PsjfComponent,
     PpComponent,
-    RrComponent
+    RrComponent,
+    SummaryTableComponent
   ],
   imports: [
     BrowserModule,

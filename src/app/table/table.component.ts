@@ -34,50 +34,53 @@ import { faTrash} from '@fortawesome/free-solid-svg-icons';
       <span aria-hidden="true">&times;</span>
     </button> 
   </div>
-  <table class="table mt-2" *ngIf="processes.length > 0">
-    <thead>
-      <tr>
-        <th scope="col">Process Name</th>
-        <th scope="col">Arrival Time</th>
-        <th scope="col">Burst Time</th>
-        <th scope="col">Priority</th>
-        <th scope="col">Color</th>
-        <th scope="col"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let process of processes; let index = index">
-        <td>
-          {{process.name}}
-        </td>
-        <td>
-          <div class="form-group">
-            <input type="text" class="form-control" id="start" [(ngModel)]="process.start" value={{process.start}}>
-          </div>
-          
-        </td>
-        <td>
-          <div class="form-group">
-            <input type="text" class="form-control" id="burst" [(ngModel)]="process.burst" value={{process.burst}}>
-          </div>
-        </td>
-        <td>
-          <div class="form-group">
-            <input type="text" class="form-control" id="prior" [(ngModel)]="process.priority" value={{process.priority}}>
-          </div>
-        </td>
-        <td>
-          <div style="background-color:{{process.color}}; padding: 15px; border: 1px solid black;">
-          </div>
-        </td>
-        <td>
-          <button type='button' class="btn btn-outline-danger btn-sm" (click)="dltProcess(index)">
-            <fa-icon [icon]="faTrash"></fa-icon>
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>`
+  <div class="table-responsive">
+    <table class="table mt-2" *ngIf="processes.length > 0">
+      <thead>
+        <tr>
+          <th scope="col">Process Name</th>
+          <th scope="col">Arrival Time</th>
+          <th scope="col">Burst Time</th>
+          <th scope="col">Priority</th>
+          <th scope="col">Color</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let process of processes; let index = index">
+          <td>
+            {{process.name}}
+          </td>
+          <td>
+            <div class="form-group">
+              <input type="text" class="form-control" id="start" [(ngModel)]="process.start" value={{process.start}}>
+            </div>
+            
+          </td>
+          <td>
+            <div class="form-group">
+              <input type="text" class="form-control" id="burst" [(ngModel)]="process.burst" value={{process.burst}}>
+            </div>
+          </td>
+          <td>
+            <div class="form-group">
+              <input type="text" class="form-control" id="prior" [(ngModel)]="process.priority" value={{process.priority}}>
+            </div>
+          </td>
+          <td>
+            <div style="background-color:{{process.color}}; padding: 15px; border: 1px solid black;">
+            </div>
+          </td>
+          <td>
+            <button type='button' class="btn btn-outline-danger btn-sm" (click)="dltProcess(index)">
+              <fa-icon [icon]="faTrash"></fa-icon>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  <div>  
+  `
 })
 export class TableComponent implements OnInit {
   processes: any[] = [];

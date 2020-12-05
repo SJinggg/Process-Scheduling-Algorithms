@@ -1,5 +1,5 @@
 import process from '../process';
-import { compareArrival } from '../comparators/comparators';
+import { compareArrival, compareName } from '../comparators/comparators';
 
 export default function fcfs(process: process[]) {
   /** Variable initialization */
@@ -14,7 +14,10 @@ export default function fcfs(process: process[]) {
     fcfsPro[i].setWaitTime(fcfsPro[i].getTurnAround() - fcfsPro[i].getArrivalTime());
     time += fcfsPro[i].getBurstTime();
   }
-  return fcfsPro;
+
+  let sortedFcfs = [...fcfsPro].sort(compareName);
+
+  return {fcfsPro, sortedFcfs};
 };
 
 function findMinArrival (process: any) {

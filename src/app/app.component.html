@@ -53,24 +53,29 @@
     </div>
   </div>
   <div *ngIf="submitted" class="mt-4 mb-4">
-    <h2>Result</h2>
-    <div class="mb-5">
-      <app-fcfs *ngIf="fcfs" [myProcess]="process"></app-fcfs>
+    <h2 class="font-weight-bolder">Result</h2>
+    <div class="mb-3" *ngIf="fcfs">
+      <app-fcfs [myProcess]="process"></app-fcfs>
+      <hr>
     </div>
-    <div class="mb-5">
-      <app-npsjf *ngIf="npsjf" [myProcess]="process"></app-npsjf>
+    <div class="mb-3" *ngIf="npsjf">
+      <app-npsjf [myProcess]="process"></app-npsjf>
+      <hr>
     </div>
-    <div class="mb-5">
-      <app-npp *ngIf="npp" [myProcess]="process"></app-npp>
+    <div class="mb-3" *ngIf="npp">
+      <app-npp [myProcess]="process"></app-npp>
+      <hr>
     </div>
-    <div class="mb-5">
-      <app-psjf *ngIf="psjf" [myProcess]="process"></app-psjf>
+    <div class="mb-3" *ngIf="psjf">
+      <app-psjf [myProcess]="process"></app-psjf>
+      <hr>
     </div>
-    <div class="mb-5">
-      <app-pp *ngIf="pp" [myProcess]="process"></app-pp>
+    <div class="mb-3" *ngIf="pp">
+      <app-pp [myProcess]="process"></app-pp>
+      <hr>
     </div>
-    <div class="mb-5">
-      <app-rr *ngIf="rr" [myProcess]="process"></app-rr>
+    <div class="mb-3" *ngIf="rr">
+      <app-rr [myProcess]="process"></app-rr>
     </div>
   </div>
 </div>

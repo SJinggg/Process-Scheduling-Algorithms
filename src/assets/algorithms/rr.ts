@@ -17,16 +17,14 @@ export default function rr(p: process[], rrI: number) {
   for(let i = minArr + 1; i <= totalBurstTime; i++) {
     if(rr[rr.length - 1].isCompleted()) {
       rr[rr.length - 1].setEndTime(i);
-      rr[rr.length - 1].setTurnAround(i - rr[rr.length - 1].getArrivalTime());
-      rr[rr.length - 1].setWaitTime(rr[rr.length - 1].getTurnAround() - rr[rr.length - 1].getArrivalTime());
 
       let temp = rrPro.find(o => o.getProcessName() === rr[rr.length - 1].getProcessName());
       let index: number;
       if(temp){
         index = rrPro.indexOf(temp);
         rrPro[index].setEndTime(rr[rr.length - 1].getEndTime());
-        rrPro[index].setTurnAround(rr[rr.length - 1].getTurnAround());
-        rrPro[index].setWaitTime(rr[rr.length - 1].getWaitTime());
+        rrPro[index].setTurnAround(i - rrPro[index].getArrivalTime());
+        rrPro[index].setWaitTime(rrPro[index].getTurnAround() - rrPro[index].getBurstTime());
       }
 
       if(waitingList.length > 0) {
@@ -47,6 +45,8 @@ export default function rr(p: process[], rrI: number) {
       if(waitingList.length > 0 && i % rrI === 0) {
         rr[rr.length - 1].setEndTime(i);
         waitingList.push(clone(rr[rr.length - 1]));
+        waitingList[waitingList.length - 1].setArrivalTime(i);
+        waitingList.sort(compareArrival);
 
         rr.push(clone(waitingList[0]));
         rr[rr.length - 1].setStartTime(i);

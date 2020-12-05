@@ -1,11 +1,13 @@
 import process, {clone} from '../process';
-import { compareBurstTime } from '../comparators/comparators';
+import { compareBurstTime, compareArrival } from '../comparators/comparators';
 
 export default function psjf(p: process[]) {
-  let waitingList: process[] = [...p].sort(compareBurstTime);
+  let waitingList: process[] = [...p].sort(compareArrival);
   let minArr = findMinArrival(p);
   let psjfPro: process[] = [...p]; 
   let psjf: process[] = []; 
+  let arrivedList: process[] = [];
+
   let totalBurstTime = waitingList.reduce((total, currp) => {
     return total + currp.getBurstTime();
   }, 0) + minArr;
@@ -15,10 +17,22 @@ export default function psjf(p: process[]) {
   psjf[0].setLeftTime();
   waitingList.shift();
   for(let i = minArr + 1; i <= totalBurstTime; i++) {
+    for(let n = 0; n < waitingList.length; n++) {
+      if(waitingList[n].getArrivalTime() === i) {
+        arrivedList.push(clone(waitingList[n]));
+        waitingList.shift();
+      }
+      else break;
+    }
+
+    if(arrivedList.length > 1){
+      arrivedList.sort(compareBurstTime);
+    }
+
     if(psjf[psjf.length - 1].isCompleted()) {
       psjf[psjf.length - 1].setEndTime(i);
       psjf[psjf.length - 1].setTurnAround(i - psjf[psjf.length - 1].getArrivalTime());
-      psjf[psjf.length - 1].setWaitTime(psjf[psjf.length - 1].getTurnAround() - psjf[psjf.length - 1].getArrivalTime());
+      psjf[psjf.length - 1].setWaitTime(psjf[psjf.length - 1].getTurnAround() - psjf[psjf.length - 1].getBurstTime());
 
       let temp = psjfPro.find(o => o.getProcessName() === psjf[psjf.length - 1].getProcessName());
       let index: number;
@@ -29,11 +43,11 @@ export default function psjf(p: process[]) {
         psjfPro[index].setWaitTime(psjf[psjf.length - 1].getWaitTime());
       }
 
-      if(waitingList.length > 0) {
-        psjf.push(clone(waitingList[0]));
+      if(arrivedList.length > 0) {
+        psjf.push(clone(arrivedList[0]));
         psjf[psjf.length - 1].setStartTime(i);
         psjf[psjf.length - 1].setLeftTime();
-        waitingList.shift();
+        arrivedList.shift();
 
         let temp = psjfPro.find(o => o.getProcessName() === psjf[psjf.length - 1].getProcessName());
         let index: number;
@@ -44,16 +58,16 @@ export default function psjf(p: process[]) {
       }
     }
     else {
-      if(waitingList.length > 0 && psjf[psjf.length - 1].getBurstTime() > waitingList[0].getBurstTime()) {
+      if(arrivedList.length > 0 && psjf[psjf.length - 1].getBurstTime() > arrivedList[0].getBurstTime()) {
         psjf[psjf.length - 1].setEndTime(i);
-        waitingList.push(clone(psjf[psjf.length - 1]));
+        arrivedList.push(clone(psjf[psjf.length - 1]));
 
-        psjf.push(clone(waitingList[0]));
+        psjf.push(clone(arrivedList[0]));
         psjf[psjf.length - 1].setStartTime(i);
         psjf[psjf.length - 1].setLeftTime();
-        waitingList.shift();
+        arrivedList.shift();
         
-        waitingList.sort(compareBurstTime);
+        arrivedList.sort(compareBurstTime);
       }
       else {
         psjf[psjf.length - 1].setLeftTime();
